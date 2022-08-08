@@ -1,0 +1,12 @@
+/**
+ * Minified by jsDelivr using clean-css v4.1.11.
+ * Original file: /npm/hack-font@3.3.0/build/web/hack.css
+ * 
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+/*!
+ *  Hack typeface https://github.com/source-foundry/Hack
+ *  License: https://github.com/source-foundry/Hack/blob/master/LICENSE.md
+ */
+@font-face{font-family:Hack;src:url(fonts/hack-regular.woff2?sha=3114f1256) format('woff2'),url(fonts/hack-regular.woff?sha=3114f1256) format('woff');font-weight:400;font-style:normal}@font-face{font-family:Hack;src:url(fonts/hack-bold.woff2?sha=3114f1256) format('woff2'),url(fonts/hack-bold.woff?sha=3114f1256) format('woff');font-weight:700;font-style:normal}@font-face{font-family:Hack;src:url(fonts/hack-italic.woff2?sha=3114f1256) format('woff2'),url(fonts/hack-italic.woff?sha=3114f1256) format('woff');font-weight:400;font-style:italic}@font-face{font-family:Hack;src:url(fonts/hack-bolditalic.woff2?sha=3114f1256) format('woff2'),url(fonts/hack-bolditalic.woff?sha=3114f1256) format('woff');font-weight:700;font-style:italic}
+/*# sourceMappingURL=/sm/f32adf9c0c87f6a0f86c5adcf6282a144615060de46e5dffb337ca6aa7e2fd90.map */
