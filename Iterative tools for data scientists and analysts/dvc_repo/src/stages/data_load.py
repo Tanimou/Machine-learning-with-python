@@ -19,6 +19,6 @@ def data_load(config_path):
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config_path', dest='param', default='dvc_repo/params.yaml')
+    parser.add_argument('--config_path', dest='param', default='params.yaml')
     args = parser.parse_args()
     data_load(config_path=args.param)

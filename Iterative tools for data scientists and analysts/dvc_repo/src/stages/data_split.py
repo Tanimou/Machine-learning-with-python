@@ -1,7 +1,8 @@
-import yaml
-from sklearn.model_selection import train_test_split
+import argparse
 
-from dvc_repo.src.stages.data_load import data_load
+import yaml
+from data_load import data_load
+from sklearn.model_selection import train_test_split
 
 
 def split(config_path):
@@ -18,4 +19,9 @@ def split(config_path):
     return dataset_train, dataset_test
 
 
-
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config_path', dest='param',
+                        default='params.yaml')
+    args = parser.parse_args()
+    split(config_path=args.param)

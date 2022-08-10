@@ -1,0 +1,55 @@
+stages:
+  data_load:
+    cmd: python src/stages/data_load.py
+    deps:
+    - src/stages/data_load.py
+    params:
+    - base
+    - data
+    outs:
+    - data/raw/iris.csv
+  featurize:
+    cmd: python src/stages/featurize.py
+    deps:
+    - src/stages/featurize.py
+    - data/raw/iris.csv
+    params:
+    - base
+    - data
+    outs:
+    - data/processed/features_iris.csv
+
+  data_split:
+    cmd: python src/stages/data_split.py
+    deps:
+    - data/processed/features_iris.csv
+    - src/stages/data_split.py
+    params:
+    - base
+    - data
+    outs:
+    - data/processed/test_iris.csv
+    - data/processed/train_iris.csv
+  
+  train:
+    cmd: python src/stages/train.py
+    deps:
+    - data/processed/train_iris.csv
+    - src/stages/train.py
+    params:
+    - base
+    - train
+    outs:
+    - models/model.joblib
+
+  evaluation:
+    cmd: python src/stages/evaluate.py
+    deps:
+    - data/processed/test_iris.csv
+    - src/stages/evaluate.py
+    params:
+    - base
+    - reports
+    - train
+    outs:
+    - reports/metrics.json

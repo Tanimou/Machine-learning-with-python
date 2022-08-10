@@ -1,10 +1,11 @@
-import yaml
+import argparse
 
-from dvc_repo.src.stages.data_load import data_load
+import yaml
+from data_load import data_load
 
 
 def featurize(config_path):
-    dataset=data_load('dvc_repo/params.yaml')
+    dataset=data_load(config_path)
     dataset['sepal_length_to_sepal_width'] = dataset['sepal_length'] / \
         dataset['sepal_width']
 
@@ -21,3 +22,11 @@ def featurize(config_path):
     with open(config_path, "r") as f:
         param = yaml.safe_load(f)
     dataset.to_csv(param['data']['features_path'], index=False)
+    
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config_path', dest='param',
+                        default='params.yaml')
+    args = parser.parse_args()
+    featurize(config_path=args.param)
