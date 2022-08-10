@@ -1,0 +1,71 @@
+schema: '2.0'
+stages:
+  data_load:
+    cmd: python src/stages/data_load.py
+    deps:
+    - path: src/stages/data_load.py
+      md5: d16a8adf76ac80d5b1e8615741269771
+      size: 753
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+        data:
+          dataset_csv: data/raw/iris.csv
+          features_path: data/processed/features_iris.csv
+          train_dataset_path: data/processed/train_iris.csv
+          test_dataset_path: data/processed/test_iris.csv
+          test_size: 0.2
+    outs:
+    - path: data/raw/iris.csv
+      md5: 4224576f0267bf88902f87f0f6200967
+      size: 2908
+  featurize:
+    cmd: python src/stages/featurize.py
+    deps:
+    - path: data/raw/iris.csv
+      md5: 4224576f0267bf88902f87f0f6200967
+      size: 2908
+    - path: src/stages/featurize.py
+      md5: 3ad385f8667371bae1f273e3749b3d53
+      size: 1052
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+        data:
+          dataset_csv: data/raw/iris.csv
+          features_path: data/processed/features_iris.csv
+          train_dataset_path: data/processed/train_iris.csv
+          test_dataset_path: data/processed/test_iris.csv
+          test_size: 0.2
+    outs:
+    - path: data/processed/features_iris.csv
+      md5: 5d03a1564b3038fc35a842f8e4bde491
+      size: 7411
+  data_split:
+    cmd: python src/stages/data_split.py
+    deps:
+    - path: data/processed/features_iris.csv
+      md5: 5d03a1564b3038fc35a842f8e4bde491
+      size: 7411
+    - path: src/stages/data_split.py
+      md5: 431d76daa1615277bd49994986f27d53
+      size: 868
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+        data:
+          dataset_csv: data/raw/iris.csv
+          features_path: data/processed/features_iris.csv
+          train_dataset_path: data/processed/train_iris.csv
+          test_dataset_path: data/processed/test_iris.csv
+          test_size: 0.2
+    outs:
+    - path: data/processed/test_iris.csv
+      md5: 267bfa51ad9743b43b712d57b227f629
+      size: 628
+    - path: data/processed/train_iris.csv
+      md5: 62ad220902012b3562015caf7c38f7e7
+      size: 2338
