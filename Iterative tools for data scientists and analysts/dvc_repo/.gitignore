@@ -14,3 +14,4 @@ __pycache__
 
 # Venv
 dvc-venv
+/file.txt
