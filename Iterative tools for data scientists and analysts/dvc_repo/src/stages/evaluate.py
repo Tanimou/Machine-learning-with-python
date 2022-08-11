@@ -4,11 +4,15 @@ import json
 
 import yaml
 from data_split import split
+from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, f1_score
 
+from src.reports.visual import plot_confusion_matrix
+
 
 def evaluate(config_path):
+    data = load_iris(as_frame=True)
     train_dataset, test_dataset = split(config_path)
     with open(config_path, "r") as f:
         param = yaml.safe_load(f)
@@ -28,6 +32,7 @@ def evaluate(config_path):
 
     cm = confusion_matrix(prediction, y_test)
     f1 = f1_score(y_true=y_test, y_pred=prediction, average='macro')
+    cm_plot = plot_confusion_matrix(cm, data.target_names, normalize=False)
 
     metrics = {'f1': f1}
     with open(param['reports']['metrics_file'], 'w') as nf:

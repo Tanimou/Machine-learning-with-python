@@ -52,4 +52,7 @@ stages:
     - reports
     - train
     outs:
-    - reports/metrics.json
+    - reports/confusion_matrix.png
+    metrics:
+    - reports/metrics.json:
+        cache: false

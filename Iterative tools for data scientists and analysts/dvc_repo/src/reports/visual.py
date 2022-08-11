@@ -2,13 +2,18 @@ import itertools
 
 import matplotlib.pyplot as plt
 import numpy as np
+import yaml
 
 
 def plot_confusion_matrix(cm,
                           target_names,
                           title='Confusion matrix',
                           cmap=None,
-                          normalize=True):
+                          normalize=True,
+                          config_path='params.yaml'):
+    
+    with open(config_path, "r") as f:
+        param = yaml.safe_load(f)
     """
     given a sklearn confusion matrix (cm), make a nice plot
 
@@ -77,3 +82,4 @@ def plot_confusion_matrix(cm,
     plt.xlabel('Predicted label\naccuracy={:0.4f}; misclass={:0.4f}'.format(
         accuracy, misclass))
     plt.show()
+    plt.savefig(param['reports']['confusion_matrix_image'])

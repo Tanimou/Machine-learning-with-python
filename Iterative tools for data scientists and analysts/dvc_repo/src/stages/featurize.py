@@ -1,6 +1,7 @@
 import argparse
 
 import yaml
+#from src.stages.data_load import data_load for jupyter notebook
 from data_load import data_load
 
 
