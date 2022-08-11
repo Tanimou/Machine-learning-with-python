@@ -100,8 +100,8 @@ stages:
       md5: 267bfa51ad9743b43b712d57b227f629
       size: 628
     - path: src/stages/evaluate.py
-      md5: 2915a4e0de450c824310b109ebc47898
-      size: 1388
+      md5: a7b852b904709ae5349432a236b3e065
+      size: 1584
     params:
       params.yaml:
         base:
@@ -117,6 +117,9 @@ stages:
             max_iter: 100
           model_path: models/model.joblib
     outs:
+    - path: reports/confusion_matrix.png
+      md5: 0a862874c900d4fdf955345a20d81ea5
+      size: 2396
     - path: reports/metrics.json
       md5: 8c4b10cc4c3f9ce82b60df863563a083
       size: 34

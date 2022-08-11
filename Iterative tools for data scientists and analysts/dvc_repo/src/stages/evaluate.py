@@ -7,8 +7,7 @@ from data_split import split
 from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, f1_score
-
-from src.reports.visual import plot_confusion_matrix
+from visual import plot_confusion_matrix
 
 
 def evaluate(config_path):
