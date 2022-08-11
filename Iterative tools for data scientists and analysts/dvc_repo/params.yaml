@@ -8,7 +8,7 @@ data:
   test_size: 0.2
 train:
   clf_params:
-    'C' : 0.001 
+    'C' : 0.1 
     'solver' : 'lbfgs' 
     'multi_class' : 'multinomial' 
     'max_iter' : 100
