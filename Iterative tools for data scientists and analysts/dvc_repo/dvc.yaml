@@ -51,8 +51,10 @@ stages:
     - base
     - reports
     - train
-    outs:
+    plots:
     - reports/confusion_matrix.png
+    - reports/confusion_matrix_data.csv:
+            template: confusion
     metrics:
     - reports/metrics.json:
         cache: false

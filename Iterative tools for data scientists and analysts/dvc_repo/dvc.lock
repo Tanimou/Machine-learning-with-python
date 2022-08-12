@@ -84,14 +84,14 @@ stages:
           random_state: 42
         train:
           clf_params:
-            C: 0.1
+            C: 0.05
             solver: lbfgs
             multi_class: multinomial
             max_iter: 100
           model_path: models/model.joblib
     outs:
     - path: models/model.joblib
-      md5: 3b94133d82339d1baa50a18fe3839c98
+      md5: 8a5df8ca2ffe68eee55b7bfc873bf3ee
       size: 863
   evaluation:
     cmd: python src/stages/evaluate.py
@@ -100,8 +100,8 @@ stages:
       md5: 267bfa51ad9743b43b712d57b227f629
       size: 628
     - path: src/stages/evaluate.py
-      md5: a7b852b904709ae5349432a236b3e065
-      size: 1584
+      md5: 1f14c05f77301925d210d390fe568fbb
+      size: 1780
     params:
       params.yaml:
         base:
@@ -109,17 +109,21 @@ stages:
         reports:
           metrics_file: reports/metrics.json
           confusion_matrix_image: reports/confusion_matrix.png
+          confusion_matrix_data: reports/confusion_matrix_data.csv
         train:
           clf_params:
-            C: 0.1
+            C: 0.05
             solver: lbfgs
             multi_class: multinomial
             max_iter: 100
           model_path: models/model.joblib
     outs:
     - path: reports/confusion_matrix.png
-      md5: 0a862874c900d4fdf955345a20d81ea5
-      size: 2396
+      md5: 3fa17e8f2c916c8bbe84330846af809b
+      size: 25014
+    - path: reports/confusion_matrix_data.csv
+      md5: 578c1f9c593f4318d40d7acf53a5fd82
+      size: 52
     - path: reports/metrics.json
-      md5: 4d9d1f9a7ac4184659b5833093abe456
-      size: 19
+      md5: 935f92b4a89f35d9eebbf8eefefa5fc3
+      size: 34

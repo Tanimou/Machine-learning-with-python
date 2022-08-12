@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>DVC Plot</title>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    
+</head>
+<body>
+    
+        <div
+            id="plot_reports_confusion_matrix_png"
+            style="border:1px solid black;text-align:center;
+            white-space: nowrap;overflow-y:hidden;">
+            <p>reports/confusion_matrix.png</p>
+
+                <div
+                    style="border:1px dotted black;margin:2px;display:
+                    inline-block;
+                    overflow:hidden;margin-left:8px;">
+                    <p>workspace</p>
+                    <img src="static\workspace_reports_confusion_matrix.png">
+                </div>
+                
+        </div>
+
+    <div id = "plot_reports_confusion_matrix_data_csv">
+        <script type = "text/javascript">
+            var spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "values": [
+    {
+        "rev": "workspace",
+        "setosa": "10",
+        "step": 0,
+        "versicolor": "0",
+        "virginica": "0"
+    },
+    {
+        "rev": "workspace",
+        "setosa": "0",
+        "step": 1,
+        "versicolor": "8",
+        "virginica": "0"
+    },
+    {
+        "rev": "workspace",
+        "setosa": "0",
+        "step": 2,
+        "versicolor": "1",
+        "virginica": "11"
+    }
+]
+    },
+    "title": "reports/confusion_matrix_data.csv",
+    "facet": {
+        "field": "rev",
+        "type": "nominal"
+    },
+    "spec": {
+        "transform": [
+            {
+                "aggregate": [
+                    {
+                        "op": "count",
+                        "as": "xy_count"
+                    }
+                ],
+                "groupby": [
+                    "virginica",
+                    "step"
+                ]
+            },
+            {
+                "impute": "xy_count",
+                "groupby": [
+                    "rev",
+                    "virginica"
+                ],
+                "key": "step",
+                "value": 0
+            },
+            {
+                "impute": "xy_count",
+                "groupby": [
+                    "rev",
+                    "step"
+                ],
+                "key": "virginica",
+                "value": 0
+            },
+            {
+                "joinaggregate": [
+                    {
+                        "op": "max",
+                        "field": "xy_count",
+                        "as": "max_count"
+                    }
+                ],
+                "groupby": []
+            },
+            {
+                "calculate": "datum.xy_count / datum.max_count",
+                "as": "percent_of_max"
+            }
+        ],
+        "encoding": {
+            "x": {
+                "field": "step",
+                "type": "nominal",
+                "sort": "ascending",
+                "title": "step"
+            },
+            "y": {
+                "field": "virginica",
+                "type": "nominal",
+                "sort": "ascending",
+                "title": "virginica"
+            }
+        },
+        "layer": [
+            {
+                "mark": "rect",
+                "width": 300,
+                "height": 300,
+                "encoding": {
+                    "color": {
+                        "field": "xy_count",
+                        "type": "quantitative",
+                        "title": "",
+                        "scale": {
+                            "domainMin": 0,
+                            "nice": true
+                        }
+                    }
+                }
+            },
+            {
+                "selection": {
+                    "label": {
+                        "type": "single",
+                        "on": "mouseover",
+                        "encodings": [
+                            "x",
+                            "y"
+                        ],
+                        "empty": "none",
+                        "clear": "mouseout"
+                    }
+                },
+                "mark": "rect",
+                "encoding": {
+                    "tooltip": [
+                        {
+                            "field": "step",
+                            "type": "nominal"
+                        },
+                        {
+                            "field": "virginica",
+                            "type": "nominal"
+                        }
+                    ],
+                    "opacity": {
+                        "condition": {
+                            "selection": "label",
+                            "value": 1
+                        },
+                        "value": 0
+                    }
+                }
+            },
+            {
+                "transform": [
+                    {
+                        "filter": {
+                            "selection": "label"
+                        }
+                    }
+                ],
+                "layer": [
+                    {
+                        "mark": {
+                            "type": "rect",
+                            "color": "lightpink"
+                        }
+                    }
+                ]
+            },
+            {
+                "mark": "text",
+                "encoding": {
+                    "text": {
+                        "field": "xy_count",
+                        "type": "quantitative"
+                    },
+                    "color": {
+                        "condition": {
+                            "test": "datum.percent_of_max > 0.5",
+                            "value": "white"
+                        },
+                        "value": "black"
+                    }
+                }
+            }
+        ]
+    }
+}
+;
+            vegaEmbed('#plot_reports_confusion_matrix_data_csv', spec);
+        </script>
+    </div>
+    
+</body>
+</html>
