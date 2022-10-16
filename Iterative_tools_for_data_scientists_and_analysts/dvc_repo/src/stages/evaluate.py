@@ -11,7 +11,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, f1_score
 from visual import plot_confusion_matrix
 
-
 def evaluate(config_path):
     data = load_iris(as_frame=True)
     
